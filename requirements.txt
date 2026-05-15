@@ -17,4 +17,7 @@ pillow
 #Frontend
 streamlit
 
+librosa
+resemblyzer
+
 
