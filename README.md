@@ -18,7 +18,7 @@ No roll calls. No sign-in sheets. Just a photo.
 ![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
+![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)
 
 </div>
@@ -29,207 +29,110 @@ No roll calls. No sign-in sheets. Just a photo.
 
 > **Try it now → [snapclass-multimodal.streamlit.app](https://snapclass-multimodal.streamlit.app/)**
 
-No installation required. Sign up as a teacher or student and explore the full biometric enrollment and attendance flow directly in the browser.
+Experience the full biometric enrollment and attendance flow — no installation required.
 
 ---
 
 ## Overview
 
-SnapClass is a biometric attendance platform designed for educational institutions. It eliminates the manual overhead of attendance tracking by leveraging two independent AI modalities simultaneously:
+SnapClass is a production-ready biometric attendance platform built for educational institutions. It eliminates the manual overhead of attendance tracking by combining two independent AI modalities:
 
 - **Face Recognition** — identifies students present in a classroom photograph
 - **Voice Verification** — confirms identity via speaker embeddings, not speech-to-text
 
-Using both modalities in tandem makes the system significantly more robust against spoofing compared to single-factor approaches, while keeping the experience effortless for both teachers and students.
+The dual-modality approach makes SnapClass significantly more robust against spoofing than single-factor alternatives, while keeping the experience seamless for both teachers and students.
 
 ---
 
-## Features
+## Key Features
 
 | Feature | Description |
 |---|---|
-| 📷 Snap-Based Attendance | Upload a class photo — AI identifies and marks present students automatically |
-| 🎙️ Voice Verification | Speaker recognition using d-vector embeddings — language-agnostic |
-| 👨‍🏫 Teacher Dashboard | Create classes, run attendance, view history, export reports |
+| 📷 Snap-Based Attendance | Upload a class photo — AI identifies and marks present students instantly |
+| 🎙️ Voice Verification | Speaker recognition using d-vector embeddings — works in any language |
+| 👨‍🏫 Teacher Dashboard | Create and manage classes, run attendance sessions, view full history |
 | 🎓 Student Portal | Enroll biometrics, track personal attendance across all enrolled classes |
-| 🔗 QR Code Enrollment | Students join classes by scanning a QR code or following a link |
-| 🔐 Secure Authentication | Passwords hashed with `bcrypt`; biometric data stored as numerical vectors |
-| ☁️ Cloud Backend | Powered by Supabase — no self-hosted infrastructure required |
+| 🔗 QR Code Class Joining | Students join via QR code scan or a shareable link — one tap enrollment |
+| 🔐 Secure Authentication | `bcrypt`-hashed passwords; biometric data stored as encrypted numerical vectors |
+| ☁️ Cloud-Powered | Fully managed backend — no infrastructure setup or maintenance required |
 
 ---
 
-## System Architecture
+## How It Works
 
-```
-app.py                              # Application entry point & session routing
-└── src/
-    └── screens/
-        ├── home_screen.py          # Landing page & authentication
-        ├── teacher_screen.py       # Teacher dashboard & controls
-        ├── student_screen.py       # Student attendance portal
-        └── components/
-            └── dialog_auto_enroll.py   # QR join-code deep-link handler
-```
-
-Navigation is managed through `st.session_state['login_type']`, which routes users to the appropriate screen based on their role (`"teacher"`, `"student"`, or `None` for the home screen). Deep-link enrollment is supported via the `?join-code=` URL query parameter.
-
----
-
-## Tech Stack
-
-| Layer | Technology | Purpose |
-|---|---|---|
-| Frontend | `streamlit` | Web UI and session management |
-| Face Recognition | `face-recognition`, `dlib-bin`, `scikit-learn` | Face encoding and classification |
-| Voice Recognition | `resemblyzer`, `librosa` | Speaker embedding and verification |
-| Database & Storage | `supabase` | Cloud PostgreSQL + file storage |
-| Authentication | `bcrypt` | Secure password hashing |
-| QR Codes | `segno` | Class join-code generation |
-| Utilities | `numpy`, `pandas`, `pillow` | Data handling and image processing |
-
-> **Note on `resemblyzer`:** Rather than transcribing speech, `resemblyzer` produces a compact numerical fingerprint of a speaker's voice (a d-vector embedding). This means the system identifies *who* is speaking regardless of *what* they say — enrollment and verification work in any language.
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.9 or higher
-- A [Supabase](https://supabase.com) project (free tier is sufficient)
-- A webcam or uploaded images as the photo source
-
-### Installation
-
-```bash
-# 1. Clone the repository
-git clone https://github.com/Kushagra-2112/SnapClass-Multimodal-AI-Attendance.git
-cd SnapClass-Multimodal-AI-Attendance
-
-# 2. (Recommended) Create a virtual environment
-python -m venv venv
-source venv/bin/activate        # On Windows: venv\Scripts\activate
-
-# 3. Install dependencies
-pip install -r requirements.txt
-```
-
-> `dlib-bin` ships pre-compiled binaries to avoid building dlib from source. On Linux, ensure `cmake` and `libopenblas-dev` are installed if you encounter issues.
-
-### Environment Configuration
-
-Create a `.env` file in the project root with your Supabase credentials:
-
-```env
-SUPABASE_URL=https://your-project-id.supabase.co
-SUPABASE_KEY=your_supabase_anon_key
-```
-
-### Running Locally
-
-```bash
-streamlit run app.py
-```
-
-The application will be available at `http://localhost:8501`.
-
----
-
-## Deployment
-
-SnapClass is deployed on **Streamlit Community Cloud**. To deploy your own instance:
-
-1. Fork this repository
-2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub
-3. Click **New app** and select your forked repository
-4. Set the main file path to `app.py`
-5. Under **Advanced settings → Secrets**, add your environment variables:
-
-```toml
-SUPABASE_URL = "https://your-project-id.supabase.co"
-SUPABASE_KEY = "your_supabase_anon_key"
-```
-
-6. Click **Deploy** — your app will be live within a few minutes
-
-> Streamlit Community Cloud is free for public repositories. Secrets are stored securely and never exposed in the UI or logs.
-
----
-
-## Database Schema
-
-The following tables are required in your Supabase project:
-
-| Table | Description |
-|---|---|
-| `users` | Teacher and student accounts with hashed passwords and roles |
-| `classes` | Class metadata, teacher association, and join codes |
-| `enrollments` | Many-to-many relationship between students and classes |
-| `face_encodings` | 128-dimensional face vectors per enrolled student |
-| `voice_embeddings` | 256-dimensional d-vector embeddings per enrolled student |
-| `attendance` | Per-session attendance records with timestamps |
-
----
-
-## Usage
-
-### Teachers
+### For Teachers
 
 1. Sign up and log in as a **Teacher**
-2. Create a class — a unique QR code and join link are generated automatically
-3. Share the QR code or join link with your students
+2. Create a class — a unique QR code and shareable join link are generated instantly
+3. Share the QR code with your students before the first session
 4. At the start of class, upload a photo of the room
-5. SnapClass identifies students and marks attendance; review and export records from the dashboard
+5. SnapClass identifies every student and marks attendance automatically
+6. Review, filter, and export attendance records from the dashboard
 
-### Students
+### For Students
 
 1. Sign up and log in as a **Student**
-2. Scan the class QR code or follow the join link to enroll
-3. Complete biometric setup — upload a clear face photo and record a short voice sample
-4. Attendance is marked automatically each session once the teacher runs recognition
+2. Scan the class QR code or open the join link to enroll
+3. Complete one-time biometric setup — a face photo and a short voice sample
+4. From that point on, attendance is marked automatically every session
 
 ---
 
-## Security
+## Why SnapClass?
 
-- Passwords are never stored in plain text — all credentials are hashed with `bcrypt` prior to storage
-- Biometric data is stored as compact numerical vectors, not as raw images or audio files
-- QR join codes are scoped per class and can be regenerated by the teacher at any time
-- Supabase Row Level Security (RLS) policies are recommended to restrict data access by user role
+| Traditional Methods | SnapClass |
+|---|---|
+| Manual roll calls waste 5–10 minutes per class | Attendance marked in seconds from a single photo |
+| Paper sign-in sheets are easy to forge | Dual biometric verification is significantly harder to spoof |
+| Spreadsheets require manual data entry | Records stored automatically in a structured cloud database |
+| No audit trail | Every session timestamped with full history |
+
+---
+
+## Technology
+
+SnapClass is built on a modern, proven technology stack:
+
+- **Frontend** — Streamlit for a fast, responsive web interface
+- **Face Recognition** — `face-recognition` + `dlib` + `scikit-learn` for accurate multi-face identification in group photos
+- **Voice Recognition** — `resemblyzer` + `librosa` for speaker d-vector embeddings (language-agnostic identity verification)
+- **Database & Storage** — Supabase (PostgreSQL) for structured records and secure file storage
+- **Security** — `bcrypt` password hashing; biometrics stored as compact numerical vectors, never as raw images or audio
+
+---
+
+## Security & Privacy
+
+- Passwords are hashed with `bcrypt` — plain text credentials are never stored
+- Biometric data (faces, voices) is stored as compact numerical vectors, not as raw media files
+- QR join codes are class-scoped and can be invalidated and regenerated by the teacher at any time
+- All data is stored in a secure, isolated cloud database
+
+---
+
+## Pricing & Licensing
+
+SnapClass is a **proprietary commercial product**. The source code is not licensed for redistribution, self-hosting, or modification without explicit written permission.
+
+For pricing, licensing inquiries, institutional plans, or a live demo walkthrough, please get in touch:
+
+📧 **[Contact for Pricing](mailto:your@email.com)**
 
 ---
 
 ## Roadmap
 
-- [ ] Liveness detection to prevent photo-based spoofing
-- [ ] Attendance export to CSV and Excel formats
-- [ ] Low-attendance alerts via email or SMS
-- [ ] Institution-level admin panel with multi-class analytics
-- [ ] Progressive Web App (PWA) support for mobile devices
-- [ ] Pinned dependency versions for reproducible builds
-
----
-
-## Contributing
-
-Contributions are welcome. To propose a significant change, please open an issue first to discuss the approach. For smaller fixes, a pull request is sufficient.
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Commit your changes: `git commit -m 'Add your feature'`
-4. Push to the branch: `git push origin feature/your-feature`
-5. Open a Pull Request
-
----
-
-## License
-
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for full details.
+- [ ] Liveness detection (anti-spoofing)
+- [ ] Attendance export to CSV and Excel
+- [ ] Low-attendance email/SMS alerts
+- [ ] Institution-level admin panel with analytics
+- [ ] Mobile app (iOS & Android)
 
 ---
 
 <div align="center">
 
-Built by [Kushagra](https://github.com/Kushagra-2112)
+© 2026 Kushagra. All rights reserved.  
+Unauthorized use, reproduction, or distribution of this software is strictly prohibited.
 
 </div>
