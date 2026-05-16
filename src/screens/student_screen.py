@@ -1,4 +1,5 @@
 import streamlit as st
+import setuptools
 from src.ui.style_base_layout import style_background_dashboard, style_base_layout
 from src.screens.components.header import header_dashboard
 from src.screens.components.footer import footer_dashboard
