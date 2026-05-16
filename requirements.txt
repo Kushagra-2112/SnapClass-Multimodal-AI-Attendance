@@ -1,25 +1,24 @@
-supabase
-bcrypt
-
-# Compatibility layer (Must be at the top)
-setuptools<82.0.0
-
-# Frontend
+#Frontend
 streamlit
 
-# Face Recognition (The order matters here)
-dlib-bin
-face-recognition
-scikit-learn
-
-# Database & Logic
-supabase
-bcrypt
 numpy
 pandas
+
+#Face Recognition
+scikit-learn
+dlib-bin
+git+https://github.com/ageitgey/face_recognition_models
+setuptools
+
+
+#Database
+supabase
+bcrypt
+
+segno
 pillow
 
-# Extras
-segno
 librosa
 resemblyzer
+
+
