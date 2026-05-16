@@ -18,7 +18,7 @@ No roll calls. No sign-in sheets. Just a photo.
 ![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
-![License](https://img.shields.io/badge/License-Proprietary-red?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)
 
 </div>
@@ -53,7 +53,7 @@ The dual-modality approach makes SnapClass significantly more robust against spo
 | 👨‍🏫 Teacher Dashboard | Create and manage classes, run attendance sessions, view full history |
 | 🎓 Student Portal | Enroll biometrics, track personal attendance across all enrolled classes |
 | 🔗 QR Code Class Joining | Students join via QR code scan or a shareable link — one tap enrollment |
-| 🔐 Secure Authentication | `bcrypt`-hashed passwords; biometric data stored as encrypted numerical vectors |
+| 🔐 Secure Authentication | `bcrypt`-hashed passwords; biometric data stored as numerical vectors |
 | ☁️ Cloud-Powered | Fully managed backend — no infrastructure setup or maintenance required |
 
 ---
@@ -110,16 +110,6 @@ SnapClass is built on a modern, proven technology stack:
 
 ---
 
-## Pricing & Licensing
-
-SnapClass is a **proprietary commercial product**. The source code is not licensed for redistribution, self-hosting, or modification without explicit written permission.
-
-For pricing, licensing inquiries, institutional plans, or a live demo walkthrough, please get in touch:
-
-📧 **[Contact for Pricing](mailto:your@email.com)**
-
----
-
 ## Roadmap
 
 - [ ] Liveness detection (anti-spoofing)
@@ -130,9 +120,14 @@ For pricing, licensing inquiries, institutional plans, or a live demo walkthroug
 
 ---
 
+## License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for full details.
+
+---
+
 <div align="center">
 
-© 2026 Kushagra. All rights reserved.  
-Unauthorized use, reproduction, or distribution of this software is strictly prohibited.
+© 2026 [Kushagra](https://github.com/Kushagra-2112). All rights reserved.
 
 </div>
