@@ -1,3 +1,6 @@
+#Frontend
+streamlit
+
 numpy
 pandas
 
@@ -13,9 +16,6 @@ bcrypt
 
 segno
 pillow
-
-#Frontend
-streamlit
 
 librosa
 resemblyzer
