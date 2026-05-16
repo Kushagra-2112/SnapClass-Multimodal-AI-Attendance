@@ -284,7 +284,7 @@ def login_teacher(username, password):
     
 
     return False
-    footer_dashboard()
+footer_dashboard()
 
 def login_teacher_logic(username, password):
     """Helper to verify and set session state."""

@@ -7,10 +7,15 @@ from src.screens.components.dialog_auto_enroll import auto_enroll_dialog
 
 def main():
 
-    if 'login_type' not in st.session_state:
+     st.set_page_config(
+        page_title='SnapClass - Making Attendance faster using AI',
+        page_icon= "https://i.ibb.co/YTYGn5qV/logo.png"
+    )
+
+     if 'login_type' not in st.session_state:
         st.session_state['login_type'] = None
     
-    match st.session_state['login_type']:
+     match st.session_state['login_type']:
         case 'teacher':
             teacher_screen()
         case 'student':
@@ -18,8 +23,8 @@ def main():
         case None:
             home_screen()
 
-    join_code = st.query_params.get('join-code')
-    if join_code:
+     join_code = st.query_params.get('join-code')
+     if join_code:
         if st.session_state.login_type != 'student':
             st.session_state.login_type = 'student'
             st.rerun()
