@@ -1,23 +1,25 @@
-#Frontend
-streamlit
-
-numpy
-pandas
-
-# Face Recognition
-face-recognition
-scikit-learn
-dlib-bin
-setuptools
-
-#Database
 supabase
 bcrypt
 
-segno
+# Compatibility layer (Must be at the top)
+setuptools<82.0.0
+
+# Frontend
+streamlit
+
+# Face Recognition (The order matters here)
+dlib-bin
+face-recognition
+scikit-learn
+
+# Database & Logic
+supabase
+bcrypt
+numpy
+pandas
 pillow
 
+# Extras
+segno
 librosa
 resemblyzer
-
-
