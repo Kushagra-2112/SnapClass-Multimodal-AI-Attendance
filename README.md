@@ -11,6 +11,10 @@ No roll calls. No sign-in sheets. Just a photo.
 
 <br/>
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-snapclass--multimodal.streamlit.app-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)](https://snapclass-multimodal.streamlit.app/)
+
+<br/>
+
 ![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=flat-square&logo=python&logoColor=white)
 ![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=flat-square&logo=streamlit&logoColor=white)
 ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat-square&logo=supabase&logoColor=white)
@@ -18,6 +22,14 @@ No roll calls. No sign-in sheets. Just a photo.
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)
 
 </div>
+
+---
+
+## 🔗 Live Demo
+
+> **Try it now → [snapclass-multimodal.streamlit.app](https://snapclass-multimodal.streamlit.app/)**
+
+No installation required. Sign up as a teacher or student and explore the full biometric enrollment and attendance flow directly in the browser.
 
 ---
 
@@ -113,13 +125,34 @@ SUPABASE_URL=https://your-project-id.supabase.co
 SUPABASE_KEY=your_supabase_anon_key
 ```
 
-### Running the Application
+### Running Locally
 
 ```bash
 streamlit run app.py
 ```
 
 The application will be available at `http://localhost:8501`.
+
+---
+
+## Deployment
+
+SnapClass is deployed on **Streamlit Community Cloud**. To deploy your own instance:
+
+1. Fork this repository
+2. Go to [share.streamlit.io](https://share.streamlit.io) and sign in with GitHub
+3. Click **New app** and select your forked repository
+4. Set the main file path to `app.py`
+5. Under **Advanced settings → Secrets**, add your environment variables:
+
+```toml
+SUPABASE_URL = "https://your-project-id.supabase.co"
+SUPABASE_KEY = "your_supabase_anon_key"
+```
+
+6. Click **Deploy** — your app will be live within a few minutes
+
+> Streamlit Community Cloud is free for public repositories. Secrets are stored securely and never exposed in the UI or logs.
 
 ---
 
